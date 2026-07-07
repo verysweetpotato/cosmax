@@ -101,15 +101,6 @@ HTML_CONTENT = r"""
     overflow:hidden;
     text-overflow:ellipsis;
   }
-  .brand-text span{
-    display:block;
-    font-size:12px;
-    color:#b9c8e0;
-    letter-spacing:1px;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-  }
   header .user-badge{
     font-size:13.5px;
     background:rgba(255,255,255,0.1);
@@ -780,7 +771,6 @@ HTML_CONTENT = r"""
     header{ padding:14px 16px; gap:10px; }
     .brand{ gap:8px; }
     .brand-logo{ width:32px; height:32px; font-size:14px; }
-    .brand-text span{ font-size:10.5px; }
     header .user-badge{ padding:7px 10px; font-size:12px; }
     .brand-text h1{ font-size:16px; }
     .page-title h2{ font-size:21px; }
@@ -843,8 +833,7 @@ HTML_CONTENT = r"""
   <div class="brand">
     <div class="brand-logo">FL</div>
     <div class="brand-text">
-      <h1>포뮬로그 FormuLog</h1>
-      <span>COSMAX R&amp;I FORMULA VERSION MANAGER</span>
+      <h1>포뮬로그</h1>
     </div>
   </div>
   <div class="user-badge">👩‍🔬 연구원 로그인</div>
