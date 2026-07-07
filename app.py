@@ -93,7 +93,7 @@ HTML_CONTENT = r"""
     min-width:0;
   }
   .brand-text h1{
-    font-size:20px;
+    font-size:24px;
     font-weight:800;
     margin:0;
     letter-spacing:0.2px;
@@ -772,7 +772,7 @@ HTML_CONTENT = r"""
     .brand{ gap:8px; }
     .brand-logo{ width:32px; height:32px; font-size:14px; }
     header .user-badge{ padding:7px 10px; font-size:12px; }
-    .brand-text h1{ font-size:16px; }
+    .brand-text h1{ font-size:19px; }
     .page-title h2{ font-size:21px; }
     .card h3{ font-size:16.5px; }
     main{ padding:28px 12px 40px; }
@@ -833,7 +833,7 @@ HTML_CONTENT = r"""
   <div class="brand">
     <div class="brand-logo">FL</div>
     <div class="brand-text">
-      <h1>포뮬로그</h1>
+      <h1>포뮬로그 FormuLog</h1>
     </div>
   </div>
   <div class="user-badge">👩‍🔬 연구원 로그인</div>
