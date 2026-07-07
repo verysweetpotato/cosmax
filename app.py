@@ -1056,6 +1056,39 @@ HTML_CONTENT = r"""
         <input type="password" id="loginPw" placeholder="비밀번호를 입력하세요">
       </div>
       <button class="btn-primary" style="width:100%;" id="loginSubmitBtn">로그인</button>
+      <button type="button" class="btn-ghost" style="width:100%;margin-top:8px;" id="goSignupBtn">계정이 없으신가요? 회원가입</button>
+    </div>
+  </div>
+</div>
+
+<!-- 회원가입 모달 -->
+<div class="modal-overlay" id="signupModalOverlay">
+  <div class="modal" style="max-width:380px;">
+    <div class="modal-header">
+      <div>
+        <h3>회원가입</h3>
+        <div class="versus">포뮬로그 계정을 만드세요</div>
+      </div>
+      <button class="modal-close" id="signupModalCloseBtn">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="field">
+        <label for="signupName">이름</label>
+        <input type="text" id="signupName" placeholder="이름을 입력하세요">
+      </div>
+      <div class="field">
+        <label for="signupId">아이디</label>
+        <input type="text" id="signupId" placeholder="아이디를 입력하세요">
+      </div>
+      <div class="field">
+        <label for="signupPw">비밀번호</label>
+        <input type="password" id="signupPw" placeholder="비밀번호를 입력하세요">
+      </div>
+      <div class="field">
+        <label for="signupPwConfirm">비밀번호 확인</label>
+        <input type="password" id="signupPwConfirm" placeholder="비밀번호를 다시 입력하세요">
+      </div>
+      <button class="btn-primary" style="width:100%;" id="signupSubmitBtn">가입하기</button>
     </div>
   </div>
 </div>
@@ -1768,6 +1801,46 @@ HTML_CONTENT = r"""
     loginId.value = "";
     loginPw.value = "";
     showToast("로그인되었습니다.");
+  });
+
+  // ---------- 회원가입 ----------
+  const goSignupBtn = document.getElementById("goSignupBtn");
+  const signupModalOverlay = document.getElementById("signupModalOverlay");
+  const signupName = document.getElementById("signupName");
+  const signupId = document.getElementById("signupId");
+  const signupPw = document.getElementById("signupPw");
+  const signupPwConfirm = document.getElementById("signupPwConfirm");
+  const signupSubmitBtn = document.getElementById("signupSubmitBtn");
+
+  function openSignupModal() {
+    closeLoginModal();
+    signupModalOverlay.classList.add("open");
+  }
+  function closeSignupModal() {
+    signupModalOverlay.classList.remove("open");
+  }
+
+  goSignupBtn.addEventListener("click", openSignupModal);
+  document.getElementById("signupModalCloseBtn").addEventListener("click", closeSignupModal);
+  signupModalOverlay.addEventListener("click", (e) => {
+    if (e.target === signupModalOverlay) closeSignupModal();
+  });
+
+  signupSubmitBtn.addEventListener("click", () => {
+    if (!signupName.value.trim()) { showToast("이름을 입력하세요."); return; }
+    if (!signupId.value.trim()) { showToast("아이디를 입력하세요."); return; }
+    if (!signupPw.value.trim()) { showToast("비밀번호를 입력하세요."); return; }
+    if (signupPw.value !== signupPwConfirm.value) { showToast("비밀번호가 일치하지 않습니다."); return; }
+
+    const newId = signupId.value.trim();
+    closeSignupModal();
+    signupName.value = "";
+    signupId.value = "";
+    signupPw.value = "";
+    signupPwConfirm.value = "";
+    showToast("회원가입이 완료되었습니다. 로그인해주세요.");
+    loginId.value = newId;
+    openLoginModal();
   });
 
   // ---------- 버전 삭제 ----------
