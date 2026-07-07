@@ -836,7 +836,7 @@ HTML_CONTENT = r"""
       <h1>포뮬로그 FormuLog</h1>
     </div>
   </div>
-  <div class="user-badge">👩‍🔬 연구원 로그인</div>
+  <div class="user-badge">Login</div>
 </header>
 
 <main>
