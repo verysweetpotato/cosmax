@@ -103,12 +103,18 @@ HTML_CONTENT = r"""
   }
   header .user-badge{
     font-size:13.5px;
+    font-weight:700;
+    color:var(--white);
     background:rgba(255,255,255,0.1);
     padding:8px 14px;
     border-radius:20px;
     border:1px solid rgba(255,255,255,0.2);
     white-space:nowrap;
     flex-shrink:0;
+    transition:background 0.15s;
+  }
+  header .user-badge:hover{
+    background:rgba(255,255,255,0.2);
   }
 
   main{
@@ -836,7 +842,7 @@ HTML_CONTENT = r"""
       <h1>포뮬로그 FormuLog</h1>
     </div>
   </div>
-  <div class="user-badge">Login</div>
+  <button type="button" class="user-badge" id="loginBadge">Login</button>
 </header>
 
 <main>
@@ -1026,6 +1032,30 @@ HTML_CONTENT = r"""
       <p class="ratio-hint" id="editRatioHint">전체 비율 합계: 0%</p>
 
       <button class="btn-primary" style="width:100%;" id="editSaveBtn">저장</button>
+    </div>
+  </div>
+</div>
+
+<!-- 로그인 모달 -->
+<div class="modal-overlay" id="loginModalOverlay">
+  <div class="modal" style="max-width:380px;">
+    <div class="modal-header">
+      <div>
+        <h3>로그인</h3>
+        <div class="versus">포뮬로그 계정으로 로그인하세요</div>
+      </div>
+      <button class="modal-close" id="loginModalCloseBtn">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="field">
+        <label for="loginId">아이디</label>
+        <input type="text" id="loginId" placeholder="아이디를 입력하세요">
+      </div>
+      <div class="field">
+        <label for="loginPw">비밀번호</label>
+        <input type="password" id="loginPw" placeholder="비밀번호를 입력하세요">
+      </div>
+      <button class="btn-primary" style="width:100%;" id="loginSubmitBtn">로그인</button>
     </div>
   </div>
 </div>
@@ -1707,6 +1737,37 @@ HTML_CONTENT = r"""
     closeEditModal();
     renderTable(searchInput.value);
     showToast(`"${name}" ${version.version} 버전이 수정되었습니다.`);
+  });
+
+  // ---------- 로그인 ----------
+  const loginBadge = document.getElementById("loginBadge");
+  const loginModalOverlay = document.getElementById("loginModalOverlay");
+  const loginId = document.getElementById("loginId");
+  const loginPw = document.getElementById("loginPw");
+  const loginSubmitBtn = document.getElementById("loginSubmitBtn");
+
+  function openLoginModal() {
+    loginModalOverlay.classList.add("open");
+  }
+  function closeLoginModal() {
+    loginModalOverlay.classList.remove("open");
+  }
+
+  loginBadge.addEventListener("click", openLoginModal);
+  document.getElementById("loginModalCloseBtn").addEventListener("click", closeLoginModal);
+  loginModalOverlay.addEventListener("click", (e) => {
+    if (e.target === loginModalOverlay) closeLoginModal();
+  });
+
+  loginSubmitBtn.addEventListener("click", () => {
+    if (!loginId.value.trim()) { showToast("아이디를 입력하세요."); return; }
+    if (!loginPw.value.trim()) { showToast("비밀번호를 입력하세요."); return; }
+
+    closeLoginModal();
+    loginBadge.textContent = loginId.value.trim();
+    loginId.value = "";
+    loginPw.value = "";
+    showToast("로그인되었습니다.");
   });
 
   // ---------- 버전 삭제 ----------
